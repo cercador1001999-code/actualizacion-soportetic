@@ -4,25 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Segurmática Antivirus - Actualización de Licencia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #111827;
+            --bg-card: #151c2c;
+            --bg-tertiary: #1a2332;
+            --accent: #00d4ff;
+            --accent-glow: rgba(0, 212, 255, 0.15);
+            --accent-2: #7c3aed;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: #1e293b;
+            --border-light: #334155;
+            --segurmatica-red: #d32f2f;
+            --segurmatica-red-dark: #b71c1c;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gradient-cyber: linear-gradient(135deg, #00d4ff 0%, #7c3aed 100%);
+            --gradient-red: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
-            background: #f5f5f5;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Arial, sans-serif;
+            background: var(--bg-primary);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
+            color: var(--text-primary);
+        }
+        .hero-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse at 20% 0%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 100%, rgba(124, 58, 237, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(211, 47, 47, 0.04) 0%, transparent 70%);
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image:
+                linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
         }
         .header {
             width: 100%;
-            background: #ffffff;
+            background: rgba(10, 14, 23, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             padding: 12px 40px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            border-bottom: 3px solid #d32f2f;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            z-index: 10;
+        }
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--segurmatica-red), var(--accent), var(--accent-2));
         }
         .logo-container {
             display: flex;
@@ -32,31 +94,34 @@
         .logo-container img {
             height: 50px;
             width: auto;
+            filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.2));
         }
         .nav-menu {
             display: flex;
             gap: 28px;
         }
         .nav-menu a {
-            color: #555;
+            color: var(--text-secondary);
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
             transition: color 0.2s;
         }
-        .nav-menu a:hover { color: #d32f2f; }
+        .nav-menu a:hover { color: var(--accent); }
         .nav-menu a.active {
-            color: #d32f2f;
-            border-bottom: 2px solid #d32f2f;
+            color: var(--segurmatica-red);
+            border-bottom: 2px solid var(--segurmatica-red);
             padding-bottom: 4px;
         }
         .banner {
             width: 100%;
-            background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+            background: var(--gradient-red);
             padding: 14px 40px;
             text-align: center;
             color: white;
             font-size: 14px;
+            position: relative;
+            z-index: 10;
         }
         .banner strong { font-weight: 600; }
         .main-container {
@@ -66,15 +131,27 @@
             justify-content: center;
             padding: 40px 20px;
             width: 100%;
+            position: relative;
+            z-index: 5;
         }
         .card {
-            background: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+            background: var(--bg-card);
+            border-radius: 16px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 60px rgba(0, 212, 255, 0.05);
             width: 100%;
             max-width: 520px;
             overflow: hidden;
-            border-top: 4px solid #d32f2f;
+            border: 1px solid var(--border-light);
+            position: relative;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--segurmatica-red), var(--accent), var(--accent-2));
         }
         .card-header {
             padding: 28px 40px 20px;
@@ -83,29 +160,30 @@
         .card-header img {
             height: 60px;
             margin-bottom: 12px;
+            filter: drop-shadow(0 0 15px rgba(211, 47, 47, 0.3));
         }
         .card-header h2 {
             font-size: 20px;
             font-weight: 700;
-            color: #333;
+            color: var(--text-primary);
             margin-bottom: 4px;
         }
         .card-header p {
             font-size: 13px;
-            color: #888;
+            color: var(--text-secondary);
         }
         .card-body {
             padding: 20px 40px 36px;
         }
         .alert-box {
-            background: #fff3e0;
-            border: 1px solid #ffe0b2;
-            border-left: 4px solid #ff9800;
-            border-radius: 6px;
+            background: rgba(245, 158, 11, 0.08);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-left: 4px solid var(--warning);
+            border-radius: 8px;
             padding: 12px 16px;
             margin-bottom: 24px;
             font-size: 13px;
-            color: #e65100;
+            color: #fbbf24;
             display: flex;
             gap: 10px;
             align-items: flex-start;
@@ -123,26 +201,28 @@
             display: block;
             font-size: 13px;
             font-weight: 600;
-            color: #444;
+            color: var(--text-secondary);
             margin-bottom: 5px;
         }
         .form-group input,
         .form-group select {
             width: 100%;
             padding: 11px 14px;
-            border: 1.5px solid #ddd;
-            border-radius: 7px;
+            border: 1.5px solid var(--border-light);
+            border-radius: 8px;
             font-size: 14px;
             transition: border-color 0.2s, box-shadow 0.2s;
             outline: none;
-            background: #fff;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
         }
         .form-group input:focus,
         .form-group select:focus {
-            border-color: #d32f2f;
-            box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.12);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
         }
-        .form-group input::placeholder { color: #bbb; }
+        .form-group input::placeholder { color: var(--text-muted); }
+        .form-group select option { background: var(--bg-card); color: var(--text-primary); }
         .form-row {
             display: flex;
             gap: 16px;
@@ -151,10 +231,10 @@
         .btn-submit {
             width: 100%;
             padding: 13px;
-            background: linear-gradient(135deg, #d32f2f, #b71c1c);
+            background: var(--gradient-red);
             color: white;
             border: none;
-            border-radius: 7px;
+            border-radius: 8px;
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
@@ -163,17 +243,17 @@
         }
         .btn-submit:hover {
             transform: translateY(-1px);
-            box-shadow: 0 4px 16px rgba(211, 47, 47, 0.3);
+            box-shadow: 0 4px 20px rgba(211, 47, 47, 0.4);
         }
         .btn-submit:active { transform: translateY(0); }
         .card-footer {
             padding: 14px 40px;
-            background: #fafafa;
-            border-top: 1px solid #eee;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
             text-align: center;
         }
         .card-footer a {
-            color: #d32f2f;
+            color: var(--accent);
             font-size: 13px;
             text-decoration: none;
             font-weight: 500;
@@ -188,11 +268,12 @@
             width: 56px;
             height: 56px;
             margin: 0 auto 16px;
-            background: #4caf50;
+            background: var(--success);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
         }
         .ticket-result .check-icon svg {
             width: 32px;
@@ -201,21 +282,21 @@
         }
         .ticket-result h3 {
             font-size: 18px;
-            color: #333;
+            color: var(--text-primary);
             margin-bottom: 8px;
         }
         .ticket-result p {
             font-size: 13px;
-            color: #888;
+            color: var(--text-secondary);
             margin-bottom: 20px;
         }
         .ticket-code {
-            font-family: 'Courier New', monospace;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
             font-size: 20px;
             font-weight: 700;
-            color: #d32f2f;
-            background: #ffebee;
-            border: 2px dashed #d32f2f;
+            color: var(--segurmatica-red);
+            background: rgba(211, 47, 47, 0.1);
+            border: 2px dashed var(--segurmatica-red);
             border-radius: 8px;
             padding: 16px 24px;
             letter-spacing: 2px;
@@ -224,24 +305,36 @@
         }
         .ticket-result .info-text {
             font-size: 13px;
-            color: #e65100;
+            color: var(--warning);
             font-weight: 600;
             margin-top: 12px;
             line-height: 1.6;
         }
         .footer {
             width: 100%;
-            background: #d32f2f;
-            color: rgba(255,255,255,0.85);
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
             padding: 20px 40px;
             text-align: center;
             font-size: 12px;
+            position: relative;
+            z-index: 10;
         }
-        .footer a { color: white; text-decoration: none; font-weight: 500; }
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--segurmatica-red), var(--accent), var(--accent-2));
+        }
+        .footer a { color: var(--accent); text-decoration: none; font-weight: 500; }
         .footer .footer-info {
             margin-top: 6px;
             font-size: 11px;
-            opacity: 0.7;
+            color: var(--text-muted);
         }
         .spinner {
             display: none;
@@ -267,6 +360,7 @@
     </style>
 </head>
 <body>
+    <div class="hero-bg"></div>
     <header class="header">
         <div class="logo-container">
             <img src="segurmatica2.jpeg" alt="Segurmática">
