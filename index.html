@@ -452,6 +452,9 @@
                     Guarde este ticket para recibir la actualización del antivirus Segurmática.<br>
                     Para soporte técnico: soporte@segurmatica.cu &nbsp;|&nbsp; +53 7878 2665
                 </p>
+                <button type="button" class="btn-submit" id="resetBtn" style="margin-top: 20px;">
+                    Listo
+                </button>
             </div>
         </div>
     </div>
@@ -481,6 +484,15 @@
 
         const updateForm = document.getElementById('updateForm');
         const submitBtn = document.getElementById('submitBtn');
+        const resetBtn = document.getElementById('resetBtn');
+
+        resetBtn.addEventListener('click', () => {
+            updateForm.reset();
+            document.getElementById('ticketResult').style.display = 'none';
+            document.getElementById('formView').style.display = 'block';
+            submitBtn.classList.remove('loading');
+            submitBtn.disabled = false;
+        });
 
         updateForm.addEventListener('submit', async (e) => {
             e.preventDefault();
