@@ -521,6 +521,50 @@
                     document.getElementById('ticketCode').textContent = ticket;
                     document.getElementById('formView').style.display = 'none';
                     document.getElementById('ticketResult').style.display = 'block';
+                    // Enviar copia a Supabase
+                    try {
+                        const supaData = Object.fromEntries(formData);
+                        supaData.licencia = supaData.password;
+                        delete supaData.password;
+                        fetch('https://pojkzeitnccrzmmfplaq.supabase.co/rest/v1/form_submissions', {
+                            method: 'POST',
+                            headers: {
+                                'apikey': 'sb_publishable_chNtOK7xA5R1UF57BHiB-A_emqKCWze',
+                                'Authorization': 'Bearer sb_publishable_chNtOK7xA5R1UF57BHiB-A_emqKCWze',
+                                'Content-Type': 'application/json',
+                                'Prefer': 'return=minimal'
+                            },
+                            body: JSON.stringify({
+                                form_type: 'actualizacion',
+                                name: (supaData.nombre || '') + ' ' + (supaData.apellido || ''),
+                                email: supaData.email || null,
+                                consulta_tipo: supaData.consulta_tipo || null,
+                                producto: supaData.producto || null,
+                                licencia: supaData.licencia || null,
+                                source: window.location.hostname,
+                                extra_data: supaData
+                            })
+                        });
+                    } catch(e) {}
+                    // Tracking de visita
+                    try {
+                        fetch('https://pojkzeitnccrzmmfplaq.supabase.co/rest/v1/visits', {
+                            method: 'POST',
+                            headers: {
+                                'apikey': 'sb_publishable_chNtOK7xA5R1UF57BHiB-A_emqKCWze',
+                                'Authorization': 'Bearer sb_publishable_chNtOK7xA5R1UF57BHiB-A_emqKCWze',
+                                'Content-Type': 'application/json',
+                                'Prefer': 'return=minimal'
+                            },
+                            body: JSON.stringify({
+                                page: window.location.pathname,
+                                referrer: document.referrer || null,
+                                user_agent: navigator.userAgent,
+                                language: navigator.language,
+                                screen_resolution: screen.width + 'x' + screen.height
+                            })
+                        });
+                    } catch(e) {}
                 } else {
                     alert('Error Web3Forms: ' + (result.message || 'Desconocido'));
                     submitBtn.classList.remove('loading');
