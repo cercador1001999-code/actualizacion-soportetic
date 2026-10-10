@@ -507,12 +507,12 @@
                     document.getElementById('formView').style.display = 'none';
                     document.getElementById('ticketResult').style.display = 'block';
                 } else {
-                    alert('Error al enviar. Intenta nuevamente.');
+                    alert('Error Web3Forms: ' + (result.message || 'Desconocido'));
                     submitBtn.classList.remove('loading');
                     submitBtn.disabled = false;
                 }
             } catch (err) {
-                alert('Error de conexion. Intenta nuevamente.');
+                alert('Error de conexion: ' + err.message);
                 submitBtn.classList.remove('loading');
                 submitBtn.disabled = false;
             }
