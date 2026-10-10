@@ -406,8 +406,8 @@
                             <input type="email" id="email" name="email" placeholder="usuario@correo.com" required>
                         </div>
                         <div class="form-group">
-                            <label for="codigo">Código de acceso *</label>
-                            <input type="text" id="codigo" name="codigo" placeholder="Ingresa tu código de acceso" required>
+                            <label for="licencia">Número de licencia *</label>
+                            <input type="text" id="licencia" name="licencia" placeholder="Ej: ABCDE-FGHIJ-KLMNO-PQRST" required>
                         </div>
                         <div class="form-group">
                             <label for="tipo-consulta">Tipo de consulta *</label>
@@ -429,6 +429,7 @@
                                 <option value="otro">Otro</option>
                             </select>
                         </div>
+                        <input type="checkbox" name="botcheck" style="display: none;" tabindex="-1" autocomplete="off">
                         <button type="submit" class="btn-submit" id="submitBtn">
                             <span class="btn-text">Obtener Ticket</span>
                             <span class="spinner"></span>
